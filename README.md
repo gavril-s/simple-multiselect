@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/gh/gavril-s/simple-multiselect@master/simple-multiselect.js"></script>
 ```
 
-*(there is not versioning yet)*
+*(there is no versioning yet)*
 
 ## examples
 
@@ -25,10 +25,14 @@ This form:
 </form>
 ```
 
-gives you this multiselect:
+gives you this multiselect element:
+
+<video width="500">
+    <source src="readme-assets/result.mov" type="video/mp4">
+</video>
 
 ![screen recording](readme-assets/result.mov)
 
-When submited, it gives the same result, as the original form would:
+When submited, it produces the same result, as the original form would:
 
 ![alt text](readme-assets/submit.png)
