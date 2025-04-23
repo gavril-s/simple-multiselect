@@ -5,10 +5,8 @@
 ## how to get
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/gavril-s/simple-multiselect@master/simple-multiselect.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gavril-s/simple-multiselect@latest/simple-multiselect.js"></script>
 ```
-
-*(there is no versioning yet)*
 
 ## examples
 
