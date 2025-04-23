@@ -27,11 +27,7 @@ This form:
 
 gives you this multiselect element:
 
-<video width="500">
-    <source src="readme-assets/result.mov" type="video/mp4">
-</video>
-
-![screen recording](readme-assets/result.mov)
+https://github.com/user-attachments/assets/7339a046-7c7b-478c-802e-f35b76dee7a2
 
 When submited, it produces the same result, as the original form would:
 
