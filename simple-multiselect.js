@@ -1,4 +1,4 @@
-const ATTRIBUTE_NAME = "multiselect"; 
+const ATTRIBUTE_NAME = "multiple"; 
 const CLASS_PREFIX = "multiselect";
 const DEFAULT_DISPLAY_CONTENT = "Not selected";
 
@@ -14,11 +14,21 @@ function createSimpleMultiselect(select) {
     const container = createContainer(select);
     const display = createDisplay(container);
     const dropdown = createDropdown(select, container, display);
+    
+    const onreplace = getOnReplace(select);
+    if (onreplace !== undefined) {
+        onreplace({
+            select: select,
+            container: container,
+            display: display,
+            dropdown: dropdown,
+        });
+    }
 }
 
 function createContainer(select) {
     const container = document.createElement("div");
-    container.classList.add(`${CLASS_PREFIX}-container`);
+    container.classList.add(`${CLASS_PREFIX}-container`, "dropdown");
     select.parentNode.insertBefore(container, select);
     return container;
 }
@@ -26,9 +36,10 @@ function createContainer(select) {
 function createDisplay(container) {
     const display = document.createElement("button");
     display.textContent = DEFAULT_DISPLAY_CONTENT;
-    display.classList.add(`${CLASS_PREFIX}-display`, "btn", "btn-outline-secondary", "dropdown-toggle");
+    display.classList.add(`${CLASS_PREFIX}-display`, "btn", "btn-outline-dark", "bg-light", "text-dark", "dropdown-toggle", "rounded-0");
+    display.setAttribute("type", "button");
     display.setAttribute("data-bs-toggle", "dropdown");
-    display.setAttribute("data-bs-auto-close", "true");
+    display.setAttribute("data-bs-auto-close", "false");
     display.setAttribute("aria-expanded", "false");
     container.appendChild(display);
     return display;
@@ -42,13 +53,13 @@ function hideSelect(select) {
 }
 
 function createDropdown(select, container, display) {
-    const dropdown = document.createElement("div");
+    const dropdown = document.createElement("ul");
     dropdown.classList.add(`${CLASS_PREFIX}-dropdown`, "dropdown-menu");
     container.appendChild(dropdown);
     
     const options = select.querySelectorAll("option");
     options.forEach(function(option, index) {
-        const optionElement = document.createElement('div');
+        const optionElement = document.createElement("li");
         optionElement.classList.add(`${CLASS_PREFIX}-option`, "dropdown-item");
         setDropdownOptionActive(optionElement, false);
         optionElement.textContent = option.textContent;
@@ -61,12 +72,12 @@ function createDropdown(select, container, display) {
 }
 
 function buildOptionElementOnClick(select, display) { 
-    return function(event) {
-        const optionIndex = event.target.getAttribute("data-value");
+    return function(evt) {
+        const optionIndex = evt.target.getAttribute("data-value");
         const option = select.children[optionIndex];
         option.toggleAttribute("selected");
         changeDisplayWithOption(display, option.textContent);
-        toggleDropdownOptionActive(event.target);
+        toggleDropdownOptionActive(evt.target);
     };
 }
 
@@ -106,12 +117,17 @@ function toggleDropdownOptionActive(option) {
 
 function setDropdownOptionActive(option, active) {
     if (active === true) {
-        option.classList.remove("bg-light");
-        option.classList.remove("text-dark");
-        option.classList.add("bg-primary", "text-white");
+        option.classList.add("bg-primary", "text-light");
     } else if (active === false) {
         option.classList.remove("bg-primary");
-        option.classList.remove("text-white");
-        option.classList.add("bg-light", "text-dark");
+        option.classList.remove("text-light");
     }
+}
+
+function getOnReplace(select) {
+    const onreplace = select.getAttribute("onreplace");
+    if (onreplace === null || onreplace === undefined) {
+        return undefined;
+    }
+    return new Function("evt", onreplace);
 }
