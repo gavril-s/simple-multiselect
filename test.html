@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+	<script src="https://cdn.jsdelivr.net/gh/Emtyloc/json-enc-custom@main/json-enc-custom.js"></script>
+    <script src="simple-multiselect.js"></script>
+</head>
+<body>
+    <form id="test-form" hx-post="/" hx-ext="json-enc-custom" parse-types="true" hx-encoding="json">
+        <select id="select-1" multiselect name="select-1">
+            <option value="1">FIRST</option>
+            <option value="2">SECOND</option>
+            <option value="3">THIRD</option>
+        </select>
+        <select id="select-2" multiple name="select-2">
+            <option value="1">FIRST</option>
+            <option value="2">SECOND</option>
+            <option value="3">THIRD</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
