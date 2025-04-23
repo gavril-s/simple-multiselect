@@ -16,12 +16,16 @@
     <div class="container text-center mt-4">
         <h1>simple-multiselect test</h1>
         <form hx-post="/" class="mt-4">
-            <select id="select-1" multiple name="select-1" onreplace="log(evt);" style="width:1000px;">
-                <option value="first">FIRST</option>
-                <option value="second">SECOND</option>
-                <option value="third">THIRD</option>
-            </select>
-            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            <div class="d-flex row justify-content-center">
+                <div class="col-md-6">
+                    <select class="w-100" id="select-1" multiple name="select-1" onreplace="log(evt);">
+                        <option value="first">FIRST</option>
+                        <option value="second">SECOND</option>
+                        <option value="third">THIRD</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2 w-100">Submit</button>
+                </div>
+            </div>
         </form>
     </div>
     <script>

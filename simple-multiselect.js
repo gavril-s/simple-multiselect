@@ -29,7 +29,7 @@ function createSimpleMultiselect(select) {
 function createContainer(select) {
     const container = document.createElement("div");
     inheritSelectProperties(select, container);
-    container.classList.add(`${CLASS_PREFIX}-container`, "dropdown");
+    container.classList.add(`${CLASS_PREFIX}-container`, "dropdown", "d-flex", "justify-content-center", "flex-column");
     select.parentNode.insertBefore(container, select);
     return container;
 }
