@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function createSimpleMultiselect(select) {
     const container = createContainer(select);
-    const display = createDisplay(select, container);
+    const display = createDisplay(container);
     const dropdown = createDropdown(select, container, display);
     hideSelect(select);
     
@@ -28,14 +28,14 @@ function createSimpleMultiselect(select) {
 
 function createContainer(select) {
     const container = document.createElement("div");
+    inheritSelectProperties(select, container);
     container.classList.add(`${CLASS_PREFIX}-container`, "dropdown");
     select.parentNode.insertBefore(container, select);
     return container;
 }
 
-function createDisplay(select, container) {
+function createDisplay(container) {
     const display = document.createElement("button");
-    inheritSelectProperties(select, display);
     display.textContent = DEFAULT_DISPLAY_CONTENT;
     display.classList.add(`${CLASS_PREFIX}-display`, "btn", "btn-outline-dark", "bg-light", "text-dark", "dropdown-toggle", "rounded-0");
     display.setAttribute("type", "button");
@@ -45,6 +45,7 @@ function createDisplay(select, container) {
     display.style.whiteSpace = "nowrap";
     display.style.overflow = "hidden";
     display.style.textOverflow = "ellipsis";
+    display.style.width = "100%";
     container.appendChild(display);
     return display;
 }
@@ -136,29 +137,21 @@ function getOnReplace(select) {
     return new Function("evt", onreplace);
 }
 
-function inheritSelectProperties(select, button) {
+function inheritSelectProperties(select, element) {
     for (let i = 0; i < select.attributes.length; i++) {
         const attr = select.attributes[i];
-        button.setAttribute(attr.name, attr.value);
+        element.setAttribute(attr.name, attr.value);
     }
 
     const computedStyle = window.getComputedStyle(select);
 
-    button.style.width = computedStyle.getPropertyValue('width');
-    // button.style.height = computedStyle.getPropertyValue('height');
-    button.style.padding = computedStyle.getPropertyValue('padding');
-    button.style.margin = computedStyle.getPropertyValue('margin');
-    button.style.border = computedStyle.getPropertyValue('border');
-    button.style.fontFamily = computedStyle.getPropertyValue('font-family');
-    button.style.fontSize = computedStyle.getPropertyValue('font-size');
-    button.style.fontWeight = computedStyle.getPropertyValue('font-weight');
-    button.style.textAlign = computedStyle.getPropertyValue('text-align');
-    button.style.boxSizing = computedStyle.getPropertyValue('box-sizing');
-    button.style.display = computedStyle.getPropertyValue('display');
-
-    button.style.color = computedStyle.getPropertyValue('color');
-    button.style.backgroundColor = computedStyle.getPropertyValue('background-color');
-    button.style.backgroundImage = computedStyle.getPropertyValue('background-image'); 
-    button.style.backgroundSize = computedStyle.getPropertyValue('background-size');
-    button.style.backgroundPosition = computedStyle.getPropertyValue('background-position');
-} 
+    element.style.width = computedStyle.getPropertyValue('width');
+    element.style.padding = computedStyle.getPropertyValue('padding');
+    element.style.margin = computedStyle.getPropertyValue('margin');
+    element.style.fontFamily = computedStyle.getPropertyValue('font-family');
+    element.style.fontSize = computedStyle.getPropertyValue('font-size');
+    element.style.fontWeight = computedStyle.getPropertyValue('font-weight');
+    element.style.textAlign = computedStyle.getPropertyValue('text-align');
+    element.style.boxSizing = computedStyle.getPropertyValue('box-sizing');
+    element.style.display = computedStyle.getPropertyValue('display');
+}
