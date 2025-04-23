@@ -29,7 +29,7 @@ function createSimpleMultiselect(select) {
 function createContainer(select) {
     const container = document.createElement("div");
     inheritSelectProperties(select, container);
-    container.classList.add(`${CLASS_PREFIX}-container`, "dropdown", "d-flex", "justify-content-center", "flex-column");
+    container.classList.add(`${CLASS_PREFIX}-container`, "dropdown", "d-flex", "justify-content-center");
     select.parentNode.insertBefore(container, select);
     return container;
 }
@@ -59,7 +59,8 @@ function hideSelect(select) {
 
 function createDropdown(select, container, display) {
     const dropdown = document.createElement("ul");
-    dropdown.classList.add(`${CLASS_PREFIX}-dropdown`, "dropdown-menu");
+    dropdown.classList.add(`${CLASS_PREFIX}-dropdown`, "dropdown-menu", "dropdown-menu-center", "w-100");
+    dropdown.style.textAlign = "center";
     container.appendChild(dropdown);
     
     const options = select.querySelectorAll("option");
